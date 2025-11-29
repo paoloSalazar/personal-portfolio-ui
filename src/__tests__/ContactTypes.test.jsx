@@ -1,6 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
-import ContactTypes from '../components/ContactTypes.jsx';
+import ContactTypes from '../components/ContactTypes/ContactTypes';
 import useContactTypes from '../hooks/useContactTypes.js';
 
 // Mock the custom hook

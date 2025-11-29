@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col, Alert } from 'react-bootstrap';
-import { createContactType } from '../services/contactTypes.js';
+import { createContactType } from '../../services/contactTypes.js';
 
 const ContactTypeForm = ({ onSuccess }) => {
   const [formData, setFormData] = useState({ name: '', description: '' });

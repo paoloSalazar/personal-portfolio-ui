@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Tabs, Tab } from 'react-bootstrap';
-import ContactTypesList from './ContactTypesList.jsx';
-import ContactTypeForm from './ContactTypeForm.jsx';
-import useContactTypes from '../hooks/useContactTypes.js';
+import ContactTypesList from './ContactTypesList';
+import ContactTypeForm from './ContactTypeForm';
+import useContactTypes from '../../hooks/useContactTypes.js';
 
 const ContactTypes = () => {
   const { data: contactTypes, loading, error, refetch } = useContactTypes();
