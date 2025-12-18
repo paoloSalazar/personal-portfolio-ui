@@ -5,7 +5,7 @@ import NavBar from './components/NavBar';
 import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
+import Skills from './components/Skills/Skills';
 import Contact from './components/Contact';
 import ContactTypes from './components/ContactTypes/ContactTypes';
 import Login from './components/Auth/Login';

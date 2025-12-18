@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Badge } from 'react-bootstrap';
-import { useAuth } from '../contexts/AuthContext';
-import useSkills from '../hooks/useSkills';
-import useUserSkills from '../hooks/useUserSkills';
-import { createSkill, associateSkill } from '../services/skills';
+import { useAuth } from '../../contexts/AuthContext';
+import useSkills from '../../hooks/useSkills';
+import useUserSkills from '../../hooks/useUserSkills';
+import { createSkill, associateSkill } from '../../services/skills';
 
 const Skills = () => {
   const { user, isAuthenticated } = useAuth();
