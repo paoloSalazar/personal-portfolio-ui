@@ -3,9 +3,12 @@ import { Container, Tabs, Tab } from 'react-bootstrap';
 import ContactTypesList from './ContactTypesList';
 import ContactTypeForm from './ContactTypeForm';
 import useContactTypes from '../../hooks/useContactTypes.js';
+import { useAuth } from '../../contexts/AuthContext';
+
 
 const ContactTypes = () => {
   const { data: contactTypes, loading, error, refetch } = useContactTypes();
+  const { isAuthenticated, logout, user } = useAuth();
 
   const handleFormSuccess = () => {
     refetch(); // Refresh the list when a new contact type is added
@@ -19,9 +22,11 @@ const ContactTypes = () => {
         <Tab eventKey="list" title="View Contact Types">
           <ContactTypesList contactTypes={contactTypes} loading={loading} error={error} />
         </Tab>
-        <Tab eventKey="add" title="Add New Contact Type">
-          <ContactTypeForm onSuccess={handleFormSuccess} />
-        </Tab>
+        {isAuthenticated && (
+          <Tab eventKey="add" title="Add New Contact Type">
+            <ContactTypeForm onSuccess={handleFormSuccess} />
+          </Tab>
+        )}
       </Tabs>
     </Container>
   );

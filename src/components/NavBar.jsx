@@ -23,9 +23,8 @@ const NavBar = () => {
             <Nav.Link as={NavLink} to="/about">About</Nav.Link>
             <Nav.Link as={NavLink} to="/projects">Projects</Nav.Link>
             <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
-            {isAuthenticated && (
-              <Nav.Link as={NavLink} to="/contact-types">Contact Types</Nav.Link>
-            )}
+            {/* Temporary disabled contact-types tab */}
+            {/* <Nav.Link as={NavLink} to="/contact-types">Contact Types</Nav.Link> */}
             {!isAuthenticated ? (
               <>
                 <Nav.Link as={NavLink} to="/login">Login</Nav.Link>

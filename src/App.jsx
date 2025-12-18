@@ -26,7 +26,9 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/contact-types" element={<ProtectedRoute><ContactTypes /></ProtectedRoute>} />
+            <Route path="/contact-types" element={<ContactTypes />} />
+
+            {/* <Route path="/contact-types" element={<ProtectedRoute><ContactTypes /></ProtectedRoute>} /> */}
           </Routes>
           <Footer />
         </div>

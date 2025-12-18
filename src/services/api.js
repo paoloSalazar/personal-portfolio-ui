@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 
 class ApiError extends Error {
   constructor(message, status) {
@@ -7,7 +7,7 @@ class ApiError extends Error {
   }
 }
 
-const handleResponse = async (response) => {
+export const handleResponse = async (response) => {
   if (!response.ok) {
     const error = await response.text();
     throw new ApiError(error || 'API request failed', response.status);
@@ -15,9 +15,9 @@ const handleResponse = async (response) => {
   return response.json();
 };
 
-const apiRequest = async (endpoint, options = {}) => {
+const apiRequest = async (endpoint, options = {}, includeToken = true) => {
   const url = `${API_BASE_URL}${endpoint}`;
-  const token = localStorage.getItem('token');
+  const token = includeToken ? localStorage.getItem('token') : null;
   const config = {
     headers: {
       'Content-Type': 'application/json',
