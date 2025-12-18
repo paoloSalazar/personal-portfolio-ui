@@ -19,9 +19,13 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
     if (storedToken) {
       setToken(storedToken);
       setIsAuthenticated(true);
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
       // Optionally, validate token with API
     }
     setLoading(false);
@@ -32,6 +36,7 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
     setIsAuthenticated(true);
     localStorage.setItem('token', newToken);
+    localStorage.setItem('user', JSON.stringify(userData));
   };
 
   const logout = () => {
@@ -39,6 +44,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setIsAuthenticated(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   };
 
   const value = {
