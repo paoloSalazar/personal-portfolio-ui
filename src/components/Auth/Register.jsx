@@ -5,7 +5,8 @@ import { useAuth } from '../../contexts/AuthContext';
 import { register as registerApi } from '../../services/auth';
 
 const Register = () => {
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,8 +27,8 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await registerApi(email, password, name);
-      login(response.token, response.user);
+      const response = await registerApi(email, password, firstName, lastName);
+      login(response.access_token, response.user);
       navigate('/');
     } catch (err) {
       setError(err.message || 'Registration failed');
@@ -46,11 +47,21 @@ const Register = () => {
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Name</Form.Label>
+                  <Form.Label>First Name</Form.Label>
                   <Form.Control
                     type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    size="lg"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     required
                     size="lg"
                   />
