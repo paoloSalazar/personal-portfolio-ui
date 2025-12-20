@@ -14,7 +14,7 @@ const Contact = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const { data: contactTypes, loading: loadingTypes, error: typesError } = useContactTypes();
-  const { data: contacts, loading: loadingContacts, error: contactsError } = useContacts(user?.id);
+  const { data: contacts, loading: loadingContacts, error: contactsError, refetch: refetchContacts } = useContacts(user?.id);
 
   const getIconClass = (contactTypeName) => {
     const iconMap = {
@@ -56,6 +56,7 @@ const Contact = () => {
       setSubmitSuccess(true);
       setContactTypeId('');
       setLinkOrNumber('');
+      refetchContacts(); // Refresh the contacts list
     } catch (err) {
       setSubmitError('Failed to register contact. Please try again.');
     } finally {
