@@ -23,7 +23,7 @@ const NavBar = () => {
             <Nav.Link as={NavLink} to="/about">About</Nav.Link>
             <Nav.Link as={NavLink} to="/projects">Projects</Nav.Link>
             
-            <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
+            
             {/* Temporary disabled contact-types tab */}
             {/* <Nav.Link as={NavLink} to="/contact-types">Contact Types</Nav.Link> */}
             {!isAuthenticated ? (
@@ -33,6 +33,7 @@ const NavBar = () => {
               </>
             ) : (
               <>
+                <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
                 <Nav.Link as={NavLink} to="/skills">Skills</Nav.Link>
                 <Button variant="outline-light" onClick={handleLogout} className="ms-2">
                   Logout {user?.name && `(${user.name})`}
