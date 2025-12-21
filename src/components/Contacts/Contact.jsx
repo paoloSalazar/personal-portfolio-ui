@@ -5,7 +5,7 @@ import useContacts from '../../hooks/useContacts';
 import { createContact } from '../../services/contact';
 import { useAuth } from '../../contexts/AuthContext';
 
-const Contact = () => {
+const Contact = ({ readOnly, userId }) => {
   const { user } = useAuth();
   const [contactTypeId, setContactTypeId] = useState('');
   const [linkOrNumber, setLinkOrNumber] = useState('');
@@ -14,7 +14,7 @@ const Contact = () => {
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const { data: contactTypes, loading: loadingTypes, error: typesError } = useContactTypes();
-  const { data: contacts, loading: loadingContacts, error: contactsError, refetch: refetchContacts } = useContacts(user?.id);
+  const { data: contacts, loading: loadingContacts, error: contactsError, refetch: refetchContacts } = useContacts(userId || user?.id);
 
   const getIconClass = (contactTypeName) => {
     const iconMap = {
@@ -67,7 +67,7 @@ const Contact = () => {
   return (
     <section id="contact" className="py-5 bg-light">
       <Container className="text-center">
-        {user && (
+        {!readOnly && user && (
           <div className="mt-5">
             <h3 className="mb-4">Register Your Contact</h3>
             {typesError && <Alert variant="danger">{typesError}</Alert>}
@@ -115,7 +115,7 @@ const Contact = () => {
         <p className="lead mb-4">
           I'd love to hear from you! Feel free to reach out for collaborations, opportunities, or just to say hello.
         </p>
-        {user && (
+        {(readOnly || user) && (
           <>
             {contactsError && <Alert variant="danger">{contactsError}</Alert>}
             {contacts && contacts.length > 0 ? (

@@ -5,12 +5,12 @@ import useSkills from '../../hooks/useSkills';
 import useUserSkills from '../../hooks/useUserSkills';
 import { createSkill, associateSkill } from '../../services/skills';
 
-const Skills = () => {
+const Skills = ({ readOnly, userId }) => {
   const { user, isAuthenticated } = useAuth();
   const [inputValue, setInputValue] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const { data: suggestions, loading, error } = useSkills(debouncedQuery);
-  const { data: userSkills, loading: userLoading, error: userError, refetch } = useUserSkills(user?.id);
+  const { data: userSkills, loading: userLoading, error: userError, refetch } = useUserSkills(userId || user?.id);
 
   // Debounce input
   useEffect(() => {
@@ -52,12 +52,24 @@ const Skills = () => {
     }
   };
 
-  if (!isAuthenticated) {
+  if (readOnly || !isAuthenticated) {
     return (
       <section id="skills" className="py-5">
         <Container>
           <h2 className="text-center mb-5 display-4">Skills</h2>
-          <p className="text-center">Please log in to manage your skills.</p>
+          <div className="text-center">
+            {userLoading && <div>Loading skills...</div>}
+            {userError && <div>Error loading skills: {userError}</div>}
+            {userSkills && userSkills.length > 0 ? (
+              userSkills.map((skill, index) => (
+                <Badge key={skill.id || index} pill variant="primary" className="me-2 mb-2">
+                  {skill.name}
+                </Badge>
+              ))
+            ) : (
+              <p>No skills available.</p>
+            )}
+          </div>
         </Container>
       </section>
     );
