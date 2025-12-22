@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { apiRequest } from '../../services/api';
+import { useAuth } from '../../contexts/AuthContext';
 
 const About = ({ readOnly, userId }) => {
   const [user, setUser] = useState(null);
+  const { user: currentUser } = useAuth();
+
+  const effectiveUserId = userId || currentUser?.id;
 
   useEffect(() => {
+    if (!effectiveUserId) return;
+
     const fetchUser = async () => {
       try {
-        const data = await apiRequest(`/users/${userId}`);
+        const data = await apiRequest(`/users/${effectiveUserId}`);
         setUser(data);
       } catch (error) {
         console.error('Error fetching user:', error);
       }
     };
     fetchUser();
-  }, [userId]);
+  }, [effectiveUserId]);
 
   if (!user) {
     return (
