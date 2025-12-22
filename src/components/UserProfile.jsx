@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Alert } from 'react-bootstrap';
 import { useUser } from '../hooks/useUsers';
-import About from './About';
+import About from './About/About';
 import Skills from './Skills/Skills';
 import Contact from './Contacts/Contact';
 

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { register as registerApi } from '../../services/auth';
+import { createUser } from '../../services/users';
+import { login as loginApi } from '../../services/auth';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -10,6 +11,8 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [aboutMe, setAboutMe] = useState('');
+  const [profilePicture, setProfilePicture] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -27,8 +30,16 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const response = await registerApi(email, password, firstName, lastName);
-      login(response.access_token, response.user);
+      const userData = {
+        name: firstName,
+        last_name: lastName,
+        email,
+        password,
+        about_me: aboutMe,
+      };
+      await createUser(userData, profilePicture);
+      const loginResponse = await loginApi(email, password);
+      login(loginResponse.access_token, loginResponse.user);
       navigate('/');
     } catch (err) {
       setError(err.message || 'Registration failed');
@@ -77,6 +88,16 @@ const Register = () => {
                   />
                 </Form.Group>
                 <Form.Group className="mb-3">
+                  <Form.Label>About Me</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    value={aboutMe}
+                    onChange={(e) => setAboutMe(e.target.value)}
+                    size="lg"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
@@ -93,6 +114,15 @@ const Register = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
+                    size="lg"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-4">
+                  <Form.Label>Profile Picture</Form.Label>
+                  <Form.Control
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setProfilePicture(e.target.files[0])}
                     size="lg"
                   />
                 </Form.Group>
