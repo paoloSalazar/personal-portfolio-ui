@@ -17,3 +17,25 @@ export const createUser = async (userData, photoFile) => {
   });
   return handleResponse(response);
 };
+
+export const updateUser = async (userId, userData) => {
+  return apiRequest(`/users/${userId}`, {
+    method: 'PUT',
+    body: JSON.stringify(userData),
+  });
+};
+
+export const uploadPhoto = async (userId, photoFile) => {
+  const url = `${API_BASE_URL}/users/${userId}/upload-photo`;
+  const token = localStorage.getItem('token');
+  const formData = new FormData();
+  formData.append('photo', photoFile);
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      ...(token && { 'Authorization': `Bearer ${token}` }),
+    },
+    body: formData,
+  });
+  return handleResponse(response);
+};

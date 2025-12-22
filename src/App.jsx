@@ -13,6 +13,7 @@ import Register from './components/Auth/Register';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import Users from './components/Users';
 import UserProfile from './components/UserProfile';
+import EditProfile from './components/EditProfile';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/contact-types" element={<ContactTypes />} />
             <Route path="/users" element={<Users />} />
             <Route path="/users/:userId" element={<UserProfile />} />
+            <Route path="/edit-profile" element={<ProtectedRoute><EditProfile /></ProtectedRoute>} />
 
             {/* <Route path="/contact-types" element={<ProtectedRoute><ContactTypes /></ProtectedRoute>} /> */}
           </Routes>
