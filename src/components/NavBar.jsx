@@ -15,12 +15,23 @@ const NavBar = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <Container>
-        <Navbar.Brand as={NavLink} to="/">Your Name</Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/">
+          {isAuthenticated && user ? (
+            <>
+              <i className="bi bi-person-circle me-2"></i>
+              {user.name} {user.last_name}
+            </>
+          ) : (
+            <>
+              <i className="bi bi-person-circle"></i>
+              MultiUser Portfolio
+            </>
+          )}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={NavLink} to="/">Home</Nav.Link>
-            <Nav.Link as={NavLink} to="/about">About</Nav.Link>
             <Nav.Link as={NavLink} to="/projects">Projects</Nav.Link>
             
             
@@ -34,6 +45,7 @@ const NavBar = () => {
               </>
             ) : (
               <>
+                <Nav.Link as={NavLink} to="/about">About</Nav.Link>
                 <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
                 <Nav.Link as={NavLink} to="/skills">Skills</Nav.Link>
                 <Button variant="outline-light" onClick={handleLogout} className="ms-2">

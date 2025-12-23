@@ -153,16 +153,6 @@ const EditProfile = () => {
                     size="lg"
                   />
                 </Form.Group>
-                {/* TODO: Implement profile picture update */}
-                {/* <Form.Group className="mb-4">
-                  <Form.Label>Profile Picture</Form.Label>
-                  <Form.Control
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setProfilePicture(e.target.files[0])}
-                    size="lg"
-                  />
-                </Form.Group> */}
                 <Button variant="primary" type="submit" disabled={loading} className="w-100 py-2" size="lg">
                   {loading ? 'Updating...' : 'Update Profile'}
                 </Button>
