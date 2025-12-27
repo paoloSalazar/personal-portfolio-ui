@@ -48,6 +48,7 @@ const NavBar = () => {
                 <Nav.Link as={NavLink} to="/about">About</Nav.Link>
                 <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
                 <Nav.Link as={NavLink} to="/skills">Skills</Nav.Link>
+                <Nav.Link as={NavLink} to="/resumes">Resumes</Nav.Link>
                 <Button variant="outline-light" onClick={handleLogout} className="ms-2">
                   Logout {user?.name && `(${user.name})`}
                 </Button>

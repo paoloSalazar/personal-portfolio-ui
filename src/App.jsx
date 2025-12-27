@@ -6,6 +6,7 @@ import Home from './components/Home';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
+import Resumes from './components/Resumes/Resumes';
 import Contact from './components/Contacts/Contact';
 import ContactTypes from './components/ContactTypes/ContactTypes';
 import Login from './components/Auth/Login';
@@ -28,6 +29,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/skills" element={<ProtectedRoute><Skills /></ProtectedRoute>} />
+            <Route path="/resumes" element={<ProtectedRoute><Resumes /></ProtectedRoute>} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

@@ -5,6 +5,7 @@ import { useUser } from '../hooks/useUsers';
 import About from './About/About';
 import Skills from './Skills/Skills';
 import Contact from './Contacts/Contact';
+import Resumes from './Resumes/Resumes';
 
 const UserProfile = () => {
   const { userId } = useParams();
@@ -20,6 +21,7 @@ const UserProfile = () => {
       <About readOnly userId={userId} />
       <Skills readOnly userId={userId} />
       <Contact readOnly userId={userId} />
+      <Resumes readOnly userId={userId} />
     </Container>
   );
 };
